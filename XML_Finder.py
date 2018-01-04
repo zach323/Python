@@ -1,4 +1,4 @@
-fhand = open('C:\\Users\\zrebstock\\Documents\\python4inf.txt')
+fhand = open('C:\\Users\\Username\\Documents\\python4inf.txt')
 
 import time
 str  = '<meterNo>' #string to be found in XML file
