@@ -1,4 +1,4 @@
-fhand = open('C:\\Users\\zrebstock\\Documents\\python4inf.txt')
+fhand = open('C:\\Users\\zrebstock\\Documents\\python_linear_search.txt')
 
 import time
 str  = input('Enter string you would like to locate: ') #string to be located in file
@@ -27,6 +27,7 @@ def find(str):
 				if found_str == str: #if complete match is found, break out of loop.
 					
 					print('Result is: ', found_str, ' on line %s '%(line_count))
+					print (line)
 					return found_str #return string to function caller
 					break
 			else:
@@ -35,7 +36,8 @@ def find(str):
 			
 				found_str = '' #reset string back to empty
 				
-				#continue #continue letter loop if no match was found
+		if found_str == str:
+			print(line)
 		
 if str != "":	
 	result = find(str)
