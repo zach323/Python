@@ -1,7 +1,7 @@
 fhand = open('C:\\Users\\zrebstock\\Documents\\python4inf.txt')
 
 import time
-str  = '<meterNo>' #string to be found in XML file
+str  = input('Enter string you would like to locate: ') #string to be located in file
 start = time.time()
 delta_time = 0
 
@@ -35,16 +35,17 @@ def find(str):
 			
 				found_str = '' #reset string back to empty
 				
-				continue #continue letter loop if no match was found
+				#continue #continue letter loop if no match was found
 		
-		
-result = find(str)
-delta_time = time.time() - start
+if str != "":	
+	result = find(str)
+	delta_time = time.time() - start
 
-print(result)
-print('Seconds elapsed: ', delta_time)	
+	print(result)
+	print('Seconds elapsed: ', delta_time)	
 	
-
+else:
+	print('sorry, empty string')
 
 			
 		
