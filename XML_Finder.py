@@ -1,9 +1,8 @@
-fhand = open('C:\\Users\\Username\\Documents\\python4inf.txt')
+fhand = open('C:\\Users\\zrebstock\\Documents\\python4inf.txt')
 
 import time
 str  = '<meterNo>' #string to be found in XML file
 start = time.time()
-end = 0
 delta_time = 0
 
 def find(str):
@@ -27,7 +26,7 @@ def find(str):
 			
 				if found_str == str: #if complete match is found, break out of loop.
 					
-					print('Result is: ', found_str, ' on line %s in %s seconds '%(line_count, delta_time))
+					print('Result is: ', found_str, ' on line %s '%(line_count))
 					return found_str #return string to function caller
 					break
 			else:
@@ -41,6 +40,7 @@ def find(str):
 		
 result = find(str)
 delta_time = time.time() - start
+
 print(result)
 print('Seconds elapsed: ', delta_time)	
 	
