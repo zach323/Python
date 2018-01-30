@@ -1,4 +1,4 @@
-fhand = open('C:\\Users\\zrebstock\\Documents\\python_linear_search.txt')
+fhand = open('C:\\Users\\User\\filename')
 
 import time
 str  = input('Enter string you would like to locate: ') #string to be located in file
