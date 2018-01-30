@@ -24,11 +24,11 @@ while row <= arrow_base_height:
 counter = arrow_head_width  # needed third variable to decrement on inner loop
 row = 1
 col = 1
-while row <= arrow_head_width:
-    while col <= counter:
+while row <= arrow_head_width: #outer loop for lines
+    while col <= counter: #inner loop for columns. Prints widest part first, then decrements
         print('*', end='')
-        col += 1
-    print()
-    col = 1
-    counter -= 1
-    row += 1
+        col += 1 #print up to counter times
+    print() #start new line
+    col = 1 #set col back to 1 to let inner loop start as TRUE
+    counter -= 1 #decrement counter for each new line, so that an angle is drawn
+    row += 1 #print new line until arrow_head_width is met
