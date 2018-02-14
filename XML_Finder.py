@@ -29,15 +29,13 @@ def find(str):
 					print('Result is: ', found_str, ' on line %s '%(line_count))
 					print (line)
 					return found_str #return string to function caller
-					break
 			else:
 				#if a match was found but the next_index match was False, reset the indexes and try again.
 				next_index=0 # reset indext back to zero
 			
 				found_str = '' #reset string back to empty
 				
-		if found_str == str:
-			print(line)
+		
 		
 if str != "":	
 	result = find(str)
