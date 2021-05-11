@@ -4,6 +4,9 @@ import json
 import requests
 import datetime as dt
 import time
+import logging
+logging.basicConfig(filename='vbox_log.log', level=logging.INFO, filemode='a')
+logger = logging.getLogger()
 class VirtualBox:
     def __init__(self):
         self.__config = Config("C:\\_source\\virtual_powerbox\\vbox.json") 
@@ -12,9 +15,10 @@ class VirtualBox:
         self.__wellId = self.__config_data["wellId"]
         self.__interval = self.__config_data["timeInterval"]
         self.__Post = PostData(self.__url, self.__wellId, self.__interval)
-    
+        
     def start(self):
         self.__Post.post_data()
+        
 
 
 
@@ -39,25 +43,41 @@ class PostData:
         self.wellId = wellid
         self.interval = interval
         self.rawdata = RawData()
+       
         
     def post_data(self):
-        data = None
-        utctime = dt.datetime.utcnow().isoformat() + "Z"
-        if not os.path.exists("rawdata.json"):
-            with open("rawdata.json","w") as file:
-                json.dump(self.rawdata.data, file)
-        else:
-            with open("rawdata.json", 'r') as f:
-                data = json.load(f)
-       
-     
-        headers = {'Content-Type': 'application/json'}
         while(True):
+            try:
+                data = None
+                utctime = dt.datetime.utcnow().isoformat() + "Z"
+                self.rawdata.data["dateTime"] = utctime
+                if not os.path.exists("rawdata.json"):
+                    with open("rawdata.json","w") as file:
+                        json.dump(self.rawdata.data, file)
+                else:
+                    with open("rawdata.json", 'r') as f:
+                        data = json.load(f)
+
+                with open("rawdata.json", "w") as f:
+                    json.dump(self.rawdata.data, f)
+            except FileNotFoundError as fnf:
+                logging.error(fnf, dt.datetime.utcnow)
+            except Exception as e:
+                logging.error(e)
+                print(e)
+                    
+        
+        
+            headers = {'Content-Type': 'application/json'}
             try:
                 r = requests.post(self.url, json=[data], headers = headers)
                 print (r.status_code)
+                logger.info("StatusCode: " + str(r.status_code) + " | " + str(utctime))
             except ConnectionError as ce:
                 print(ce)
+                logging.error(ce)
+            except Exception as e:
+                logging.error(e)
             else:
                 time.sleep(self.interval)
 
